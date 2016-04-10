@@ -39,13 +39,19 @@ public class ContaController {
 	
 	@RequestMapping("/listaContas")
 	  public String lista(Model mv){
-
 	      ContaDAO dao = new ContaDAO();
 	      List<Conta> contas = dao.lista();        
-	      mv.addAttribute("todasContas", contas);        
+	      mv.addAttribute("todasContas", contas); 
+	      
 	      return "conta/lista";
 	  }
 
-
+	@RequestMapping("/removeConta")
+	public String remove(Conta conta) {
+		ContaDAO dao = new ContaDAO();
+		dao.remove(conta);
+		
+		return "forward:listaContas";
+	}
 
 }
