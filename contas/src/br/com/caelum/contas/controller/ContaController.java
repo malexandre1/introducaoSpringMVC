@@ -38,13 +38,13 @@ public class ContaController {
 	
 	
 	@RequestMapping("/listaContas")
-	  public String lista(Model mv){
-	      ContaDAO dao = new ContaDAO();
-	      List<Conta> contas = dao.lista();        
-	      mv.addAttribute("todasContas", contas); 
-	      
-	      return "conta/lista";
-	  }
+    public String lista(Model mv){
+        ContaDAO dao = new ContaDAO();
+        List<Conta> contas = dao.lista();        
+        mv.addAttribute("todasContas", contas); 
+      
+        return "conta/lista";
+    }
 
 	@RequestMapping("/removeConta")
 	public String remove(Conta conta) {
@@ -52,6 +52,21 @@ public class ContaController {
 		dao.remove(conta);
 		
 		return "forward:listaContas";
+	}
+	
+	@RequestMapping("mostraConta")
+	public String mostra(Long id, Model model) {
+		ContaDAO dao = new ContaDAO();
+		model.addAttribute("conta", dao.buscaPorId(id));
+		
+		return "conta/mostra";
+	}
+	
+	@RequestMapping("/alteraConta")
+	public String altera(Conta conta) {
+		ContaDAO dao = new ContaDAO();
+		dao.altera(conta);
+		return "redirect:listaContas";
 	}
 
 }
