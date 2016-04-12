@@ -7,7 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="resources/js/jquery.js"></script>
 </head>
+<script>
+  function pagaAgora(id) {
+    $.post("pagaConta", {'id' : id}, function() {
+      $("#conta_" + id).html("Paga");
+    });
+  }
+</script>
 <body>
 
 	<table style="height: 10px; width: 775px;" border="1">
@@ -28,7 +36,10 @@
             <td>${conta.tipo}</td>
             <td id="conta_${conta.id}">
                 <c:if test="${conta.paga eq false}">
-                    Não paga
+                    <!-- Não paga -->
+                    <a href="#" onClick="pagaAgora(${conta.id})">
+				      Pagar agora!
+				    </a>
                 </c:if>
                 <c:if test="${conta.paga eq true }">
                     Paga!
