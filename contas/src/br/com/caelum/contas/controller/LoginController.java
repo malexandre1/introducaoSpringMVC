@@ -23,7 +23,13 @@ public class LoginController {
 			return "usuario/menu";
 		}
 		
-		return "usuario/formulario-login";
+		return "redirect:formulario-login";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+	  session.invalidate();
+	  return "redirect:loginForm";
 	}
 
 }
